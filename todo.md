@@ -3,7 +3,7 @@
 [*] setup docker
 [*] install prisma(db&client)/prostgres
 [*] testing conection db/migration
-[*] testing api 
+[*] testing api
 [*] setup prisma service dan module / ubah ke commonjs
 
 #CRUD USER
@@ -13,6 +13,7 @@
 [*] delete user
 
 #Auth User
-[] login user
+[*] login user
+[*] generate access token dan refresh token
 [] middleware user
 [] logout user

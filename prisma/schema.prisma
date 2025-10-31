@@ -10,15 +10,16 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  name      String
-  phone     String?
-  roles     String   @default("customer")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  rental    Rental[]
+  id                 String               @id @default(uuid())
+  email              String               @unique
+  password           String
+  name               String
+  phone              String?
+  roles              String               @default("customer")
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  rental             Rental[]
+  AccessRefreshToken AccessRefreshToken[]
 }
 
 model Tool {
@@ -47,4 +48,13 @@ model Rental {
   returnDate DateTime?
   tool       Tool      @relation(fields: [toolId], references: [id])
   user       User      @relation(fields: [userId], references: [id])
+}
+
+model AccessRefreshToken {
+  id           String   @id @default(uuid()) // Ganti @id dari String biasa ke UUID
+  userId       String // Ubah user_id menjadi userId sesuai konvensi
+  refreshToken String   @unique // Kolom untuk menyimpan Refresh Token
+  expiredAt    DateTime // Tipe data yang benar
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id]) // Relasi ke model User
 }
