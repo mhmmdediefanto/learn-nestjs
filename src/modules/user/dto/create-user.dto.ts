@@ -20,7 +20,7 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'Nama tidak boleh kosong' })
   name: string;
   @IsString({ message: 'Phone harus berupa string' })
-  @IsNotEmpty({ message: 'Phone tidak boleh kosong' })
+  @IsOptional()
   phone: string;
   @IsString({ message: 'Roles harus berupa string' })
   @IsOptional()
