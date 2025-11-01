@@ -1,4 +1,5 @@
 import { NestFactory, Reflector } from '@nestjs/core';
+import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
@@ -15,6 +16,15 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   // untuk serialize class
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  // cookie parser
+  app.use(cookieParser());
+  // enable cors
+  app.enableCors({
+    origin: '*',
+    credential: true,
+  });
+
   await app.listen(process.env.PORT!);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }

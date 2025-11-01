@@ -52,7 +52,7 @@ model Rental {
 
 model AccessRefreshToken {
   id           String   @id @default(uuid()) // Ganti @id dari String biasa ke UUID
-  userId       String // Ubah user_id menjadi userId sesuai konvensi
+  userId       String   @unique
   refreshToken String   @unique // Kolom untuk menyimpan Refresh Token
   expiredAt    DateTime // Tipe data yang benar
   createdAt    DateTime @default(now())

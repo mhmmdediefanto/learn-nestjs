@@ -15,5 +15,5 @@
 #Auth User
 [*] login user
 [*] generate access token dan refresh token
-[] middleware user
-[] logout user
+[*] middleware user
+[*] logout user
