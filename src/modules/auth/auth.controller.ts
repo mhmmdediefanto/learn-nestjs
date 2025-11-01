@@ -11,7 +11,7 @@ import {
 import { AuthService } from './auth.service';
 import { AuthLoginDto } from './dto/auth.login.dto';
 import { Request, Response } from 'express';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { User } from 'generated/prisma/client';
 
 @Controller('auth')

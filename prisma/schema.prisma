@@ -15,7 +15,7 @@ model User {
   password           String
   name               String
   phone              String?
-  roles              String               @default("customer")
+  roles              Roles                @default(CUSTOMER)
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   rental             Rental[]
@@ -57,4 +57,9 @@ model AccessRefreshToken {
   expiredAt    DateTime // Tipe data yang benar
   createdAt    DateTime @default(now())
   user         User     @relation(fields: [userId], references: [id]) // Relasi ke model User
+}
+
+enum Roles {
+  CUSTOMER
+  ADMIN
 }

@@ -1,11 +1,13 @@
 import {
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Roles } from 'generated/prisma/enums';
 
 export class CreateUserDto {
   @IsEmail({}, { message: 'Email tidak valid' })
@@ -22,7 +24,7 @@ export class CreateUserDto {
   @IsString({ message: 'Phone harus berupa string' })
   @IsOptional()
   phone: string;
-  @IsString({ message: 'Roles harus berupa string' })
+  @IsEnum(Roles, { message: 'Role tidak valid' })
   @IsOptional()
-  roles: string;
+  roles: Roles;
 }

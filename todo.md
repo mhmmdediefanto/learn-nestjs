@@ -17,3 +17,11 @@
 [*] generate access token dan refresh token
 [*] middleware user
 [*] logout user
+[*] roles/authorization
+
+#CRUD tools
+[*] Create
+[] Update
+[*] Delete
+[*] Detail
+[*] List

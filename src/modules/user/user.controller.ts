@@ -8,13 +8,19 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Role } from 'src/common/decorators/role.decorator';
 
 @Controller('user')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Role('ADMIN')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
