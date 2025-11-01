@@ -1,13 +1,32 @@
 import { NestFactory, Reflector } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
-import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import {
+  BadRequestException,
+  ClassSerializerInterceptor,
+  ValidationPipe,
+} from '@nestjs/common';
 import { HttpExceptionFilter } from './common/exceptions/http-exception.filter';
+import { ValidationError } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // untuk global dto validation class validator
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      exceptionFactory: (errors: ValidationError[]) => {
+        // Ubah array ValidationError menjadi objek { field: 'pesan error' }
+        const formattedErrors = errors.reduce((acc, err) => {
+          acc[err.property] = Object.values(err.constraints ?? {}).join(', ');
+          return acc;
+        }, {});
+
+        // Lemparkan exception baru dengan format yang sudah kita ubah
+        // Filter kita akan menangkap ini
+        return new BadRequestException(formattedErrors);
+      },
+    }),
+  );
 
   // untuk prefiks url api
   app.setGlobalPrefix('api');

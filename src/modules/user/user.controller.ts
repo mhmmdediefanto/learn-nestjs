@@ -36,13 +36,24 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll() {
+    const { total, users } = await this.userService.findAll();
+    return {
+      data: users,
+      count: total,
+      message: 'User berhasil ditemukan',
+      statusCode: HttpStatus.OK,
+    };
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const user = await this.userService.findOne(id);
+    return {
+      data: user,
+      message: 'User berhasil ditemukan',
+      statusCode: HttpStatus.OK,
+    };
   }
 
   @Patch(':id')

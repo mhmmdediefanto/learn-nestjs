@@ -21,7 +21,14 @@
 
 #CRUD tools
 [*] Create
-[] Update
+[*] Update
 [*] Delete
 [*] Detail
 [*] List
+
+#CRUD rental admin
+[] create rental
+[] update rental
+[] delete rental
+[] detail rental
+[*] list rental

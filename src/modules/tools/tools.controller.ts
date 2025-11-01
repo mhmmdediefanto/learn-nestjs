@@ -34,9 +34,10 @@ export class ToolsController {
 
   @Get()
   async findAll() {
-    const tools = await this.toolsService.findAll();
+    const { total, tools } = await this.toolsService.findAll();
     return {
       data: tools,
+      count: total,
       message: 'Tool berhasil ditemukan',
       statusCode: HttpStatus.OK,
     };
@@ -53,8 +54,13 @@ export class ToolsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateToolDto: UpdateToolDto) {
-    return this.toolsService.update(+id, updateToolDto);
+  async update(@Param('id') id: string, @Body() updateToolDto: UpdateToolDto) {
+    const tool = await this.toolsService.update(id, updateToolDto);
+    return {
+      data: tool,
+      message: 'Tool berhasil diupdate',
+      statusCode: HttpStatus.OK,
+    };
   }
 
   @Delete(':id')
