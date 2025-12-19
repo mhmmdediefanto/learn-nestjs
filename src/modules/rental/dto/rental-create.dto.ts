@@ -1,6 +1,10 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class RentalCreateDto {
+  @IsNotEmpty({ message: 'User id harus di isi' })
+  @IsString({ message: 'User id harus berupa string' })
+  userId: string;
+
   @IsNotEmpty({ message: 'Tool id harus di isi' })
   @IsString({ message: 'Tool id harus berupa string' })
   toolId: string;

@@ -27,7 +27,7 @@
 [*] List
 
 #CRUD rental admin
-[] create rental
+[*] create rental
 [] update rental
 [] delete rental
 [] detail rental
